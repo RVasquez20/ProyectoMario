@@ -53,6 +53,7 @@ public class evaluacion_estudiante {
         try {
             String linea = "";
             long numLinea = 0;
+            numeroLineas.clear();
             FileReader filePreguntas = new FileReader(urlArchivo);
             BufferedReader bufferFilePreguntas = new BufferedReader(filePreguntas);
             while ((linea = bufferFilePreguntas.readLine()) != null) {
@@ -69,6 +70,7 @@ public class evaluacion_estudiante {
         } catch (Exception ex) {
             System.out.println("Error ::" + ex.getMessage());
         }
+        preguntasElegidas.clear();
         if(numeroLineas.size()>3){
         while (preguntasElegidas.size() != 3) {
             numeroAleatorioPosicion = (int) (Math.random() * numeroLineas.size());
