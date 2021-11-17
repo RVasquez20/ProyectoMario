@@ -10,12 +10,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,8 +22,8 @@ public class evaluacion_estudiante {
 
     public Scanner escaner = new Scanner(System.in);
     public Semaphore semaphore;
-    public final String urlArchivo = "/home/ghostman/volume5/Preguntas.csv";
-    public final String urlArchivoRespuestas = "/home/ghostman/volume5/Respuestas.txt";
+    public final String urlArchivo = "/usr/src/proyecto/preguntas.txt";
+    public final String urlArchivoRespuestas = "/usr/src/proyecto/respuestas.txt";
     public List<Long> numeroLineas = new ArrayList<>();
     public HashSet<Long> preguntasElegidas = new HashSet<>();
     public int numeroAleatorioPosicion;
@@ -35,6 +32,23 @@ public class evaluacion_estudiante {
         this.semaphore = semaphore;
     }
 
+    /**
+     * Esta funcion recibe como parametro la categoria y buscara en el
+     * archivo de preguntas las lineas en donde se encuentre dicha 
+     * categoria, las almacenara en una lista para posteriormente seleccionar
+     * 3 de esa lista aleatoriamente sin repetir el numero de linea, 
+     * posteriormente los almacenara en un hashset y luego por cada 
+     * uno de los 3 numeros buscara en el archivo de preguntas, la pregunta
+     * correspondiente al numero de linea indicado, mostrara tambien al usuario
+     * la categoria y la pregunta, para posteriormente quedar esperando 
+     * la respuesta del usuario, luego de que el usuario responda verificara
+     * el estado del semaphore, si esta disponible pasara a escribir en el 
+     * archivo de respuestas los datos correspondientes con el formato 
+     * indicado
+     * (categoria\numero de linea de la pregunta \respuesta del estudiante)
+     * luego liberara el ho
+     * @param categoria 
+     */
     public void procesoEvalucionPorEstudiante(String categoria) {
         try {
             String linea = "";
@@ -50,7 +64,6 @@ public class evaluacion_estudiante {
                     stringToken.nextToken();
                 }
             }
-            System.out.println(numeroLineas);
             bufferFilePreguntas.close();
             filePreguntas.close();
         } catch (Exception ex) {
@@ -62,7 +75,6 @@ public class evaluacion_estudiante {
             long numeroPreguntaAleatorio = numeroLineas.get(numeroAleatorioPosicion);
             preguntasElegidas.add(numeroPreguntaAleatorio);
         }
-        System.out.println(preguntasElegidas);
         for (Long numberpreguntaElegida : preguntasElegidas) {
             String respuestaEstudiante = "";
             try {

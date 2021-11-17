@@ -7,23 +7,24 @@ package Preguntas;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author blitxs1226
  */
 public class Cuestionario {
 
-    public final String urlArchivo = "/home/ghostman/volume5/Preguntas.csv";
+    public final String urlArchivo = "/usr/src/proyecto/preguntas.txt";
     public String linea;
     public final String[] categoriasDisponibles={"BASIC_COMMANDS", "SHELL_SCRIPTS", "SECURE_SHELL",
         "POSIX_SEMAPHORES", "MAVEN", "JAVA_THREADS", "DOCKERS"};
+    /**
+     * Esta funcion se encargara de listar las preguntas con sus respectivos indices
+     * y categoria las cuales estan almacenadas en el archivo el cual lleva de nombre
+     * "preguntas"
+     */
     public void listaPreguntas() {
         long numLinea=0;
         System.out.println("Listado de Preguntas");
@@ -46,6 +47,11 @@ public class Cuestionario {
         }
     }
 
+    /**
+     * En esta funcion mostraremos las categorias displonibles para poder
+     * escribir 1 pregunta a cerca de la categoria previamente escrita
+     * por el usuario y se aniadira al archivo de preguntas
+     */
     public void adicionarNuevaPregunta() {
         Scanner escaneo=new Scanner(System.in);
         System.out.println("De las siguiente categorias escriba la que corresponda a su Pregunta:");
@@ -60,7 +66,6 @@ public class Cuestionario {
              filePregunta.append(categoriaElegida.toUpperCase()+"\\"+ preguntaNueva + "\n");
             filePregunta.flush();
             filePregunta.close();
-            System.out.println("Pregunta Agregada Exitosamente :D");  
         } catch (Exception execp) {
               System.out.println("Error :" + execp.getMessage());
         }
@@ -70,7 +75,12 @@ public class Cuestionario {
             System.out.println("Categoria Elegida no Disponible...");
         }
     }
-    
+    /**
+     * Esta funcion de encarga de verificar que si la categoria escrita
+     * por el usuario esta dentro de las categorias disponibles
+     * @param categoriaSeleccionada
+     * @return 
+     */
     public boolean verificarCategoria(String categoriaSeleccionada){
         return (Arrays.asList(categoriasDisponibles).contains(categoriaSeleccionada));
     }

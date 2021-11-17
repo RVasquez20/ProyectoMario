@@ -8,14 +8,19 @@ import EvaluarEstudiante.evaluacion_estudiante;
 import EvaluarEstudiante.generacionReporte;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author blitxs1226
  */
 public class main {
+    /**
+     * Esta funcion Iniciara el hilo que genera el reporte y tambien esta
+     * funcion se encarga de mostrar el menu de seleccion, en el cual el
+     * estudiante escriba la categoria la cual desea acceder y de esta misma
+     * forma iniciara su evaluacion
+     * @param args 
+     */
     public static void main(String[] args) {
          Semaphore semaphore = new Semaphore(1);
 Scanner escaner=new Scanner(System.in);
